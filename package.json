@@ -22,15 +22,22 @@
   "activationEvents": [],
   "main": "./out/extension.js",
   "contributes": {
-    "commands": [],
     "views": {
       "explorer": [
         {
+          "type": "webview",
           "id": "wpmView",
           "name": "WPM Fighter"
         }
       ]
-    }
+    },
+    "commands": [
+      {
+        "command": "wpmFighter.clearLog",
+        "category": "WPM Fighter",
+        "title": "Clear Log"
+      }
+    ]
   },
   "scripts": {
     "vscode:prepublish": "npm run compile",
