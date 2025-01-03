@@ -1,7 +1,7 @@
 {
   "name": "wpm-fighter",
-  "displayName": "wpm-fighter",
-  "description": "[VSCode Extension] 키보드 타이핑 속도(Word Per Min)을 바탕으로 플레이하는 간단한 미니게임",
+  "displayName": "WPM Fighter",
+  "description": "A Simple Mini-Game Based on Typing Speed (Words Per Minute)",
   "author": "Jangmyun",
   "license": "MIT",
   "publisher": "Jangmyun",
@@ -12,7 +12,7 @@
   "bugs": {
     "url": "https://github.com/Computer-Research-Association/WPM-Fighter/issues"
   },
-  "version": "0.0.1",
+  "version": "0.0.2",
   "engines": {
     "vscode": "^1.96.0"
   },
