@@ -15,5 +15,23 @@ export default class WpmFighterViewProvider implements vscode.WebviewViewProvide
     webviewView: vscode.WebviewView,
     context: vscode.WebviewViewResolveContext,
     token: vscode.CancellationToken
-  ): Thenable<void> | void {}
+  ): Thenable<void> | void {
+    this._webviewView = webviewView;
+
+    webviewView.webview.options = {
+      enableScripts: true,
+      localResourceRoots: [this._context.extensionUri],
+    };
+  }
+
+  private getHTMLForWebview(context: vscode.ExtensionContext): string {
+    const HTML_PATH = path.join(context.extensionPath, "media", "webview.html");
+    let HTML = fs.readFileSync(HTML_PATH, "utf-8");
+
+    return HTML;
+  }
+}
+
+function getWebviewUri(base: vscode.Uri, fileName: string): vscode.Uri {
+  return vscode.Uri.joinPath(base, "media", fileName);
 }
