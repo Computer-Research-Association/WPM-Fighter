@@ -4,6 +4,7 @@
   "description": "[VSCode Extension] 키보드 타이핑 속도(Word Per Min)을 바탕으로 플레이하는 간단한 미니게임",
   "author": "Jangmyun",
   "license": "MIT",
+  "publisher": "Coding Research Association",
   "repository": {
     "type": "git",
     "url": "https://github.com/Computer-Research-Association/WPM-Fighter"
