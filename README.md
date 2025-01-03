@@ -1,71 +1,50 @@
-# wpm-fighter README
+# Welcome to WPM Fighter 👋
+![Version](https://img.shields.io/badge/version-0.0.1-blue.svg?cacheSeconds=2592000)
+![Prerequisite](https://img.shields.io/badge/vscode-%5E1.96.0-blue.svg)
+[![Documentation](https://img.shields.io/badge/documentation-yes-brightgreen.svg)](https://github.com/Computer-Research-Association/WPM-Fighter#readme)
+[![Maintenance](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/Computer-Research-Association/WPM-Fighter/graphs/commit-activity)
+[![License: MIT](https://img.shields.io/github/license/Jangmyun/WPM Fighter)](https://github.com/Computer-Research-Association/WPM-Fighter/blob/master/LICENSE)
 
-This is the README for your extension "wpm-fighter". After writing up a brief description, we recommend including the following sections.
+> [VSCode Extension] 키보드 타이핑 속도(Word Per Min)을 바탕으로 플레이하는 간단한 미니게임
 
-## Features
+## Prerequisites
 
-Describe specific features of your extension including screenshots of your extension in action. Image paths are relative to this README file.
+- vscode ^1.96.0
 
-For example if there is an image subfolder under your extension project workspace:
+## Install
 
-\!\[feature X\]\(images/feature-x.png\)
+```sh
+npm install
+```
 
-> Tip: Many popular extensions utilize animations. This is an excellent way to show off your extension! We recommend short, focused animations that are easy to follow.
+## Run tests
 
-## Requirements
+```sh
+npm run test
+```
 
-If you have any requirements or dependencies, add a section describing those and how to install and configure them.
+## Author
 
-## Extension Settings
+👤 **Jangmyun**
 
-Include if your extension adds any VS Code settings through the `contributes.configuration` extension point.
+* Github: [@Jangmyun](https://github.com/Jangmyun)
 
-For example:
+## 🤝 Contributing
 
-This extension contributes the following settings:
+Contributions, issues and feature requests are welcome!
 
-* `myExtension.enable`: Enable/disable this extension.
-* `myExtension.thing`: Set to `blah` to do something.
+Feel free to check [issues page](https://github.com/Computer-Research-Association/WPM-Fighter/issues). You can also take a look at the [contributing guide](https://github.com/Computer-Research-Association/WPM-Fighter/blob/master/CONTRIBUTING.md).
 
-## Known Issues
+## Show your support
 
-Calling out known issues can help limit users opening duplicate issues against your extension.
+Give a ⭐️ if this project helped you!
 
-## Release Notes
 
-Users appreciate release notes as you update your extension.
+## 📝 License
 
-### 1.0.0
+Copyright © 2025 [Jangmyun](https://github.com/Jangmyun).
 
-Initial release of ...
+This project is [MIT](https://github.com/Computer-Research-Association/WPM-Fighter/blob/master/LICENSE) licensed.
 
-### 1.0.1
-
-Fixed issue #.
-
-### 1.1.0
-
-Added features X, Y, and Z.
-
----
-
-## Following extension guidelines
-
-Ensure that you've read through the extensions guidelines and follow the best practices for creating your extension.
-
-* [Extension Guidelines](https://code.visualstudio.com/api/references/extension-guidelines)
-
-## Working with Markdown
-
-You can author your README using Visual Studio Code. Here are some useful editor keyboard shortcuts:
-
-* Split the editor (`Cmd+\` on macOS or `Ctrl+\` on Windows and Linux).
-* Toggle preview (`Shift+Cmd+V` on macOS or `Shift+Ctrl+V` on Windows and Linux).
-* Press `Ctrl+Space` (Windows, Linux, macOS) to see a list of Markdown snippets.
-
-## For more information
-
-* [Visual Studio Code's Markdown Support](http://code.visualstudio.com/docs/languages/markdown)
-* [Markdown Syntax Reference](https://help.github.com/articles/markdown-basics/)
-
-**Enjoy!**
+***
+_This README was generated with ❤️ by [readme-md-generator](https://github.com/kefranabg/readme-md-generator)_
