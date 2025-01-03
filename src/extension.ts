@@ -1,26 +1,59 @@
-// The module 'vscode' contains the VS Code extensibility API
-// Import the module and reference it with the alias vscode in your code below
-import * as vscode from 'vscode';
+import * as vscode from "vscode";
 
-// This method is called when your extension is activated
-// Your extension is activated the very first time the command is executed
+let wordCount = 0;
+let startTime: number | null = null;
+
 export function activate(context: vscode.ExtensionContext) {
+  const wpmTreeProvider = new WPMTreeProvider();
+  vscode.window.registerTreeDataProvider("wpmView", wpmTreeProvider);
 
-	// Use the console to output diagnostic information (console.log) and errors (console.error)
-	// This line of code will only be executed once when your extension is activated
-	console.log('Congratulations, your extension "wpm-fighter" is now active!');
+  vscode.workspace.onDidChangeTextDocument((event) => {
+    if (!startTime) {
+      startTime = Date.now();
+    }
 
-	// The command has been defined in the package.json file
-	// Now provide the implementation of the command with registerCommand
-	// The commandId parameter must match the command field in package.json
-	const disposable = vscode.commands.registerCommand('wpm-fighter.helloWorld', () => {
-		// The code you place here will be executed every time your command is executed
-		// Display a message box to the user
-		vscode.window.showInformationMessage('Hello World from wpm-fighter!');
-	});
+    const changes = event.contentChanges;
+    for (const change of changes) {
+      wordCount += countWords(change.text);
+    }
 
-	context.subscriptions.push(disposable);
+    const elapsedTime = (Date.now() - startTime) / 60000;
+    const wpm = Math.round(wordCount / elapsedTime) / 5;
+    wpmTreeProvider.updateWPM(wpm);
+  });
 }
 
-// This method is called when your extension is deactivated
+function countWords(text: string): number {
+  const words = text.match(/\b\w+\b/g);
+  return words ? words.length : 0;
+}
+
+class WPMTreeProvider implements vscode.TreeDataProvider<TreeItem> {
+  private _onDidChangeTreeData: vscode.EventEmitter<TreeItem | undefined | void> = new vscode.EventEmitter<
+    TreeItem | undefined | void
+  >();
+  readonly onDidChangeTreeData: vscode.Event<TreeItem | undefined | void> = this._onDidChangeTreeData.event;
+
+  private currentWPM = 0;
+
+  updateWPM(wpm: number) {
+    this.currentWPM = wpm;
+    this._onDidChangeTreeData.fire();
+  }
+
+  getTreeItem(element: TreeItem): vscode.TreeItem {
+    return element;
+  }
+
+  getChildren(): Thenable<TreeItem[]> {
+    return Promise.resolve([new TreeItem(`WPM: ${this.currentWPM}`)]);
+  }
+}
+
+class TreeItem extends vscode.TreeItem {
+  constructor(label: string) {
+    super(label, vscode.TreeItemCollapsibleState.None);
+  }
+}
+
 export function deactivate() {}
