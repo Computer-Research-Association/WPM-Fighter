@@ -24,6 +24,8 @@ class TypingTracker {
   }
 
   private initialize() {
+    vscode.workspace.onDidChangeTextDocument(this.onDidChangeTextDocument, this, this._context.subscriptions);
+
     this.startTime = Date.now();
   }
 
