@@ -33,6 +33,11 @@
     },
     "commands": [
       {
+        "command": "wpmFighter.toggle",
+        "category": "WPM Fighter",
+        "title": "Toggle WPM Fighter"
+      },
+      {
         "command": "wpmFighter.clearLog",
         "category": "WPM Fighter",
         "title": "Clear Log"
