@@ -25,6 +25,14 @@ export default class WpmFighterViewProvider implements vscode.WebviewViewProvide
     webviewView.webview.onDidReceiveMessage((data) => {
       console.log(data);
     });
+
+    webviewView.onDidChangeVisibility((e) => {
+      if (webviewView.visible) {
+        console.log("WPM View Visible");
+      } else {
+        console.log("WPM View Invisible");
+      }
+    });
   }
 
   private getHTMLForWebview(webview: vscode.Webview): string {
