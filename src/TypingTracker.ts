@@ -24,4 +24,10 @@ class TypingTracker {
   private initialize() {
     this.startTime = Date.now();
   }
+
+  private onDidChangeTextDocument(event: vscode.TextDocumentChangeEvent) {
+    if (!event.contentChanges.length) return;
+
+    this.charCount += event.contentChanges.length;
+  }
 }
