@@ -4,14 +4,16 @@ class TypingTracker {
   private static instance: TypingTracker;
 
   private _context: vscode.ExtensionContext;
+
   private charCount: number = 0;
-  private startTime: number = Date.now();
+  private startTime: number = 0;
   private wpm: number = 0;
   private timer?: NodeJS.Timeout;
   private isTracking: boolean = false;
 
   private constructor(context: vscode.ExtensionContext) {
     this._context = context;
+    this.initialize();
   }
 
   public static getInstance(context: vscode.ExtensionContext): TypingTracker {
