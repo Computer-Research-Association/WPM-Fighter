@@ -22,6 +22,11 @@ export default class WpmFighterViewProvider implements vscode.WebviewViewProvide
       enableScripts: true,
       localResourceRoots: [this._context.extensionUri],
     };
+    webviewView.webview.html = this.getHTMLForWebview(webviewView.webview);
+
+    webviewView.webview.onDidReceiveMessage((data) => {
+      console.log(data);
+    });
   }
 
   private getHTMLForWebview(webview: vscode.Webview): string {
@@ -49,17 +54,14 @@ export default class WpmFighterViewProvider implements vscode.WebviewViewProvide
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-        <link href="${styleResetUri}" rel="stylesheet" />
-        <link href="${styleVSCodeUri}" rel="stylesheet" />
-        <link href="${styleMainUri}" rel="stylesheet" />
+        <link href="${styleResetUri}" rel="stylesheet">
+				<link href="${styleVSCodeUri}" rel="stylesheet">
+				<link href="${styleMainUri}" rel="stylesheet">
 
-        <title>Cat Colors</title>
+        <title>${WpmFighterViewProvider.viewID}</title>
       </head>
       <body>
-        <ul class="color-list"></ul>
-
-        <button class="add-color-button">Add Color</button>
-
+        TEST
         <script nonce="${nonce}" src="${mainScriptUri}"></script>
       </body>
     </html>`;
