@@ -20,4 +20,8 @@ class TypingTracker {
     }
     return TypingTracker.instance;
   }
+
+  private initialize() {
+    this.startTime = Date.now();
+  }
 }
