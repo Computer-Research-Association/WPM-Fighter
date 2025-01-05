@@ -30,4 +30,18 @@ class TypingTracker {
 
     this.charCount += event.contentChanges.length;
   }
+
+  public calculateWPM(): number {
+    const elapsedTime = (Date.now() - this.startTime) / 60000;
+    return Math.round(this.charCount / 5 / elapsedTime);
+  }
+
+  public reset() {
+    this.charCount = 0;
+    this.startTime = Date.now();
+  }
+
+  public getCharCount(): number {
+    return this.charCount;
+  }
 }
