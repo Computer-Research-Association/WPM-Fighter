@@ -1,19 +1,17 @@
 import * as vscode from "vscode";
+import GameManager from "./GameManager";
 
-class TypingTracker {
+export default class TypingTracker {
   private static instance: TypingTracker;
-
-  private _context: vscode.ExtensionContext;
-
   private charCount: number = 0;
-  private startTime: number = 0;
+  private startTime: number = Date.now();
   private wpm: number = 0;
   private timer?: NodeJS.Timeout;
   private isTracking: boolean = false;
+  private context: vscode.ExtensionContext;
 
   private constructor(context: vscode.ExtensionContext) {
-    this._context = context;
-    this.initialize();
+    this.context = context;
   }
 
   public static getInstance(context: vscode.ExtensionContext): TypingTracker {
@@ -23,29 +21,61 @@ class TypingTracker {
     return TypingTracker.instance;
   }
 
-  private initialize() {
-    vscode.workspace.onDidChangeTextDocument(this.onDidChangeTextDocument, this, this._context.subscriptions);
-
+  public startTracking() {
+    if (this.isTracking) return;
+    this.isTracking = true;
     this.startTime = Date.now();
+    this.charCount = 0;
+
+    this.registerTextChangeListener();
+    this.startTimer();
+  }
+
+  public pauseTracking() {
+    if (!this.isTracking) return;
+    this.isTracking = false;
+    this.unregisterTextChangeListener();
+    this.stopTimer();
+  }
+
+  private registerTextChangeListener() {
+    vscode.workspace.onDidChangeTextDocument(this.onDidChangeTextDocument, this, this.context.subscriptions);
+  }
+
+  private unregisterTextChangeListener() {
+    // 모든 리스너 제거
+    vscode.workspace.onDidChangeTextDocument(this.onDidChangeTextDocument, this, []);
   }
 
   private onDidChangeTextDocument(event: vscode.TextDocumentChangeEvent) {
-    if (!event.contentChanges.length) return;
-
-    this.charCount += event.contentChanges.length;
+    const changes = event.contentChanges;
+    changes.forEach((change) => {
+      const length = change.text.length - change.rangeLength;
+      this.charCount += length;
+    });
   }
 
-  public calculateWPM(): number {
-    const elapsedTime = (Date.now() - this.startTime) / 60000;
-    return Math.round(this.charCount / 5 / elapsedTime);
+  private startTimer() {
+    this.timer = setInterval(() => {
+      const elapsedTime = (Date.now() - this.startTime) / 1000 / 60; // 분 단위
+      this.wpm = Math.round(this.charCount / 5 / elapsedTime);
+      this.updateGame(this.wpm);
+
+      // 리셋
+      this.charCount = 0;
+      this.startTime = Date.now();
+    }, 2000); // 60초마다 업데이트
   }
 
-  public reset() {
-    this.charCount = 0;
-    this.startTime = Date.now();
+  private stopTimer() {
+    if (this.timer) {
+      clearInterval(this.timer);
+      this.timer = undefined;
+    }
   }
 
-  public getCharCount(): number {
-    return this.charCount;
+  private updateGame(wpm: number) {
+    // 게임 로직 업데이트
+    GameManager.getInstance().updateGame(wpm);
   }
 }
