@@ -1,3 +1,17 @@
 body {
-  background-color: transparent;
+  padding: 10px;
+  font-family: var(--vscode-font-family);
+  color: var(--vscode-foreground);
+}
+
+#monster-health {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+#message {
+  color: var(--vscode-textLink-foreground);
+  font-style: italic;
+  min-height: 20px;
 }

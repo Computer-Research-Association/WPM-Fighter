@@ -1,4 +1,5 @@
 import * as vscode from "vscode";
+import GameManager from "./GameManager";
 
 export default class WpmFighterViewProvider implements vscode.WebviewViewProvider {
   public static readonly viewID = "wpmView";
@@ -15,6 +16,9 @@ export default class WpmFighterViewProvider implements vscode.WebviewViewProvide
     token: vscode.CancellationToken
   ): Thenable<void> | void {
     this._webviewView = webviewView;
+
+    const gameManager = GameManager.getInstance();
+    gameManager.setWebviewView(webviewView);
 
     webviewView.webview.options = {
       enableScripts: true,
@@ -56,7 +60,8 @@ export default class WpmFighterViewProvider implements vscode.WebviewViewProvide
 				-->
         <meta
           http-equiv="Content-Security-Policy"
-          content="default-src 'none'; style-src ${webview.cspSource}; script-src 'nonce-${nonce}';" />
+          content="default-src 'none'; img-src ${webview.cspSource} https:; style-src ${webview.cspSource} 'unsafe-inline'; script-src 'nonce-${nonce}';"
+        />
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
@@ -67,7 +72,8 @@ export default class WpmFighterViewProvider implements vscode.WebviewViewProvide
         <title>${WpmFighterViewProvider.viewID}</title>
       </head>
       <body>
-        TEST
+        <div id="monster-health">0</div>
+        <div id="message"></div>
         <script nonce="${nonce}" src="${mainScriptUri}"></script>
       </body>
     </html>`;
